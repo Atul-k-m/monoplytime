@@ -74,9 +74,12 @@ body {
 .timer-box {
     background-color: #fff;
     border: 8px solid var(--color-black);
-    padding: 2.5rem 8rem;
+    padding: 4rem 0rem; 
+    width: 800px;
     box-shadow: 12px 12px 0px var(--color-black);
     transition: background-color 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    justify-content: center;
 }
 
 #time-text {
@@ -84,6 +87,7 @@ body {
     font-weight: bold;
     line-height: 1;
     letter-spacing: 4px;
+    font-variant-numeric: tabular-nums; /* Keeps numbers monospaced */
 }
 
 .controls-container {
@@ -96,7 +100,9 @@ body {
     font-family: 'Glonto', sans-serif;
     font-size: 2rem;
     font-weight: bold;
-    padding: 1rem 3rem;
+    padding: 1rem 0;
+    width: 250px;
+    text-align: center;
     border: 6px solid var(--color-black);
     cursor: pointer;
     text-transform: uppercase;

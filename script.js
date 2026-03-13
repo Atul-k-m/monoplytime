@@ -1,7 +1,6 @@
 const timeDisplay = document.getElementById('time-text');
 
-const startBtn = document.getElementById('start-btn');
-const pauseBtn = document.getElementById('pause-btn');
+const toggleBtn = document.getElementById('toggle-btn');
 const resetBtn = document.getElementById('reset-btn');
 
 const TOTAL_TIME = 5 * 60; // 8 minutes in seconds
@@ -44,29 +43,30 @@ function tick() {
         clearInterval(timerInterval);
         timerInterval = null;
         isFinshed = true;
-        startBtn.disabled = true;
-        startBtn.textContent = 'START TIMER';
+        toggleBtn.disabled = true;
+        toggleBtn.textContent = 'START TIMER';
+        toggleBtn.className = 'btn btn-pink';
         updateDisplay();
     }
 }
 
-function startTimer() {
-    if (timerInterval) return; // already running
+function handleToggleTimer() {
     if (isFinshed) return;
     
-    timerInterval = setInterval(tick, 1000);
-    startBtn.textContent = 'RUNNING...';
-    pauseBtn.disabled = false;
-    updateDisplay();
-}
-
-function pauseTimer() {
-    if (!timerInterval) return; // not running
-    
-    clearInterval(timerInterval);
-    timerInterval = null;
-    startBtn.textContent = 'RESUME';
-    document.body.classList.remove('state-running');
+    if (timerInterval) {
+        // Pause logic
+        clearInterval(timerInterval);
+        timerInterval = null;
+        toggleBtn.textContent = 'RESUME';
+        toggleBtn.className = 'btn btn-yellow';
+        document.body.classList.remove('state-running');
+    } else {
+        // Start/resume logic
+        timerInterval = setInterval(tick, 1000);
+        toggleBtn.textContent = 'PAUSE';
+        toggleBtn.className = 'btn btn-pink';
+        updateDisplay();
+    }
 }
 
 function resetTimer() {
@@ -74,13 +74,14 @@ function resetTimer() {
     timerInterval = null;
     timeRemaining = TOTAL_TIME;
     isFinshed = false;
-    startBtn.disabled = false;
-    startBtn.textContent = 'START TIMER';
+    toggleBtn.disabled = false;
+    toggleBtn.textContent = 'START TIMER';
+    toggleBtn.className = 'btn btn-pink';
+    document.body.classList.remove('state-running', 'state-qna', 'state-danger');
     updateDisplay();
 }
 
-startBtn.addEventListener('click', startTimer);
-pauseBtn.addEventListener('click', pauseTimer);
+toggleBtn.addEventListener('click', handleToggleTimer);
 resetBtn.addEventListener('click', resetTimer);
 
 // Initialize display
