@@ -4,7 +4,7 @@ const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
 const resetBtn = document.getElementById('reset-btn');
 
-const TOTAL_TIME = 8 * 60; // 8 minutes in seconds
+const TOTAL_TIME = 5 * 60; // 8 minutes in seconds
 const QNA_TIME = 2 * 60;   // last 2 minutes
 
 let timeRemaining = TOTAL_TIME;
