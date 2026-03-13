@@ -3,8 +3,8 @@ const timeDisplay = document.getElementById('time-text');
 const toggleBtn = document.getElementById('toggle-btn');
 const resetBtn = document.getElementById('reset-btn');
 
-const TOTAL_TIME = 5 * 60; // 8 minutes in seconds
-const QNA_TIME = 2 * 60;   // last 2 minutes
+const TOTAL_TIME = 3 * 60; // 8 minutes in seconds
+const QNA_TIME = 1 * 60;   // last 2 minutes
 
 let timeRemaining = TOTAL_TIME;
 let timerInterval = null;
