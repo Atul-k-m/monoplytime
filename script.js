@@ -1,7 +1,5 @@
 const timeDisplay = document.getElementById('time-text');
 const statusMessage = document.getElementById('status-message');
-const circleProgress = document.querySelector('.circle-progress .progress');
-const container = document.querySelector('.timer-container');
 
 const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
@@ -14,10 +12,6 @@ let timeRemaining = TOTAL_TIME;
 let timerInterval = null;
 let isFinshed = false;
 
-// 2 * PI * R (90)
-const circumference = 2 * Math.PI * 90;
-circleProgress.style.strokeDasharray = `${circumference}`;
-
 function formatTime(seconds) {
     const m = Math.floor(seconds / 60).toString().padStart(2, '0');
     const s = (seconds % 60).toString().padStart(2, '0');
@@ -27,24 +21,21 @@ function formatTime(seconds) {
 function updateDisplay() {
     timeDisplay.textContent = formatTime(timeRemaining);
     
-    // Calculate progress offset
-    const progressOffset = circumference - (timeRemaining / TOTAL_TIME) * circumference;
-    circleProgress.style.strokeDashoffset = progressOffset;
+    // Clear all state classes
+    document.body.classList.remove('state-qna', 'state-danger', 'state-running');
 
-    container.classList.remove('state-qna', 'state-danger');
-
-    // Update messages and themes based on remaining time
     if (timeRemaining === 0) {
-        statusMessage.textContent = "Time's up!";
-        container.classList.add('state-danger');
+        statusMessage.textContent = "TIME'S UP!";
+        document.body.classList.add('state-danger');
     } else if (timeRemaining <= QNA_TIME) {
-        statusMessage.textContent = "QnA time!";
-        container.classList.add('state-qna');
+        statusMessage.textContent = "Q&A TIME!";
+        document.body.classList.add('state-qna');
     } else {
         if (timerInterval) {
-            statusMessage.textContent = "Timer running...";
+            statusMessage.textContent = "RUNNING";
+            document.body.classList.add('state-running');
         } else {
-            statusMessage.textContent = "Ready";
+            statusMessage.textContent = "READY";
         }
     }
 }
@@ -60,7 +51,7 @@ function tick() {
         timerInterval = null;
         isFinshed = true;
         startBtn.disabled = true;
-        startBtn.textContent = 'Start';
+        startBtn.textContent = 'START TIMER';
         updateDisplay();
     }
 }
@@ -70,7 +61,7 @@ function startTimer() {
     if (isFinshed) return;
     
     timerInterval = setInterval(tick, 1000);
-    startBtn.textContent = 'Running';
+    startBtn.textContent = 'RUNNING...';
     pauseBtn.disabled = false;
     updateDisplay();
 }
@@ -80,8 +71,9 @@ function pauseTimer() {
     
     clearInterval(timerInterval);
     timerInterval = null;
-    startBtn.textContent = 'Resume';
-    statusMessage.textContent = "Paused";
+    startBtn.textContent = 'RESUME';
+    statusMessage.textContent = "PAUSED";
+    document.body.classList.remove('state-running');
 }
 
 function resetTimer() {
@@ -90,15 +82,8 @@ function resetTimer() {
     timeRemaining = TOTAL_TIME;
     isFinshed = false;
     startBtn.disabled = false;
-    startBtn.textContent = 'Start';
-    statusMessage.textContent = "Ready";
-    container.classList.remove('state-qna', 'state-danger');
-    // Important: remove CSS transition briefly so it snaps back, or let it animate smoothly back to 0
-    circleProgress.style.transition = 'none';
+    startBtn.textContent = 'START TIMER';
     updateDisplay();
-    setTimeout(() => {
-        circleProgress.style.transition = 'stroke-dashoffset 1s linear, stroke 0.5s ease';
-    }, 50);
 }
 
 startBtn.addEventListener('click', startTimer);

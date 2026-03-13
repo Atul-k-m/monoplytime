@@ -1,13 +1,10 @@
 :root {
-    --color-bg: #f2f5ff;
-    --color-primary: #55d6c2;
-    --color-warning: #f5e960;
-    --color-danger: #f49097;
-    --color-accent: #dfb2f4;
-    --color-text: #2c3e50;
-    --color-glass-bg: rgba(255, 255, 255, 0.4);
-    --color-glass-border: rgba(255, 255, 255, 0.5);
-    --color-glass-shadow: rgba(0, 0, 0, 0.1);
+    --color-pink: #F49097;
+    --color-purple: #DFB2F4;
+    --color-yellow: #F5E960;
+    --color-teal: #55D6C2;
+    --color-bg: #F2F5FF;
+    --color-black: #000000;
 }
 
 @font-face {
@@ -31,158 +28,132 @@
 }
 
 body {
-    background: linear-gradient(135deg, var(--color-bg), var(--color-accent));
+    background-color: var(--color-bg);
+    /* Grid background */
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
     font-family: 'Glonto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: var(--color-text);
-    overflow: hidden;
-}
-
-.timer-container {
-    background: var(--color-glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--color-glass-border);
-    border-radius: 30px;
-    padding: 3rem;
-    box-shadow: 0 20px 40px var(--color-glass-shadow), 
-                inset 0 1px 0 rgba(255,255,255,0.7);
-    text-align: center;
-    width: 400px;
+    color: var(--color-black);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.timer-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.15), 
-                inset 0 1px 0 rgba(255,255,255,0.8);
-}
-
-.circle-progress {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    display: flex;
     justify-content: center;
-    align-items: center;
+    height: 100vh;
+    padding: 2rem;
+    overflow: hidden;
+    text-transform: uppercase;
 }
 
-.circle-progress svg {
+.main-header {
+    text-align: center;
+    margin-bottom: 3rem;
     position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
+    top: 5vh;
 }
 
-.circle-progress circle {
-    fill: transparent;
-    stroke-width: 10;
-    stroke-linecap: round;
+.main-header h1 {
+    font-size: 8rem;
+    letter-spacing: -2px;
+    line-height: 0.9;
 }
 
-.circle-progress .bg {
-    stroke: rgba(255, 255, 255, 0.5);
-}
-
-.circle-progress .progress {
-    stroke: var(--color-primary);
-    stroke-dasharray: 565; /* 2 * PI * r (90) */
-    stroke-dashoffset: 0;
-    transition: stroke-dashoffset 1s linear, stroke 0.5s ease;
-    filter: drop-shadow(0 0 8px var(--color-primary));
-}
-
-.time-display {
-    z-index: 1;
-    font-size: 4rem;
-    font-weight: bold;
-    color: var(--color-text);
-    letter-spacing: 2px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.message-box h1 {
-    font-family: 'LoveMalia', cursive;
+.main-header h2 {
     font-size: 2.5rem;
-    color: var(--color-text);
-    margin: 0;
-    min-height: 3.5rem;
-    line-height: 1.2;
-    transition: color 0.3s ease;
+    letter-spacing: 4px;
+    margin-top: 0.5rem;
 }
 
-.controls {
+.header-container {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.status-box {
+    background-color: var(--color-black);
+    color: #fff;
+    padding: 1rem 3rem;
+    border: 4px solid var(--color-black);
+    box-shadow: 6px 6px 0px var(--color-black);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+}
+
+#status-message {
+    font-family: 'LoveMalia', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.timer-container {
+    margin-bottom: 3rem;
+}
+
+.timer-box {
+    background-color: #fff;
+    border: 6px solid var(--color-black);
+    padding: 2rem 5rem;
+    box-shadow: 8px 8px 0px var(--color-black);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#time-text {
+    font-size: 10rem;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 4px;
+}
+
+.controls-container {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
+    gap: 1.5rem;
 }
 
 .btn {
     font-family: 'Glonto', sans-serif;
-    font-size: 1.1rem;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(4px);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 1rem 2.5rem;
+    border: 4px solid var(--color-black);
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--color-black);
+    box-shadow: 6px 6px 0px var(--color-black);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0px var(--color-black);
 }
 
-.btn.primary { margin-right: 0; }
-.btn.primary:hover { background: var(--color-primary); color: white; }
+.btn-pink { background-color: var(--color-pink); }
+.btn-yellow { background-color: var(--color-yellow); }
+.btn-teal { background-color: var(--color-teal); }
 
-.btn.secondary:hover { background: var(--color-warning); color: #333; }
+/* Dynamic States applied to elements via Body class */
 
-.btn.danger:hover { background: var(--color-danger); color: white; }
-
-/* Dynamic states added via JS */
-.state-qna .circle-progress .progress {
-    stroke: var(--color-warning);
-    filter: drop-shadow(0 0 8px var(--color-warning));
+/* State: QNA */
+body.state-qna .timer-box {
+    background-color: var(--color-yellow);
 }
-.state-qna .message-box h1 {
-    color: #e0ac00; /* Darker yellow for text contrast */
-    animation: pulse 2s infinite;
+body.state-qna .status-box {
+    background-color: var(--color-yellow);
+    color: var(--color-black);
 }
 
-.state-danger .circle-progress .progress {
-    stroke: var(--color-danger);
-    filter: drop-shadow(0 0 8px var(--color-danger));
+/* State: DANGER / TIME UP */
+body.state-danger .timer-box {
+    background-color: var(--color-pink);
 }
-.state-danger .message-box h1 {
-    color: var(--color-danger);
-    animation: pulseFast 1s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
+body.state-danger .status-box {
+    background-color: var(--color-pink);
+    color: var(--color-black);
 }
 
-@keyframes pulseFast {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+/* State: RUNNING */
+body.state-running .status-box {
+    background-color: var(--color-purple);
+    color: var(--color-black);
 }

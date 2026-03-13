@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimalist Timer</title>
+    <title>Minimalist Brutalist Timer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="timer-container">
-        <div class="circle-progress">
-            <svg viewBox="0 0 200 200">
-                <circle class="bg" cx="100" cy="100" r="90"></circle>
-                <circle class="progress" cx="100" cy="100" r="90"></circle>
-            </svg>
-            <div class="time-display">
-                <span id="time-text">08:00</span>
-            </div>
-        </div>
-        
-        <div class="message-box">
-            <h1 id="status-message">Ready</h1>
-        </div>
+    <div class="main-header">
+        <h1>EMPIREX</h1>
+        <h2>E-CELL BMSIT&M</h2>
+    </div>
 
-        <div class="controls">
-            <button id="start-btn" class="btn primary">Start</button>
-            <button id="pause-btn" class="btn secondary">Pause</button>
-            <button id="reset-btn" class="btn danger">Reset</button>
+    <div class="header-container">
+        <div class="status-box" id="status-box">
+            <h2 id="status-message">READY</h2>
         </div>
     </div>
+
+    <div class="timer-container">
+        <div class="timer-box" id="timer-box">
+            <h1 id="time-text">08:00</h1>
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <button id="start-btn" class="btn btn-pink">START TIMER</button>
+        <button id="pause-btn" class="btn btn-yellow">PAUSE</button>
+        <button id="reset-btn" class="btn btn-teal">RESET</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
