@@ -1,5 +1,4 @@
 const timeDisplay = document.getElementById('time-text');
-const statusMessage = document.getElementById('status-message');
 
 const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
@@ -25,17 +24,12 @@ function updateDisplay() {
     document.body.classList.remove('state-qna', 'state-danger', 'state-running');
 
     if (timeRemaining === 0) {
-        statusMessage.textContent = "TIME'S UP!";
         document.body.classList.add('state-danger');
     } else if (timeRemaining <= QNA_TIME) {
-        statusMessage.textContent = "Q&A TIME!";
         document.body.classList.add('state-qna');
     } else {
         if (timerInterval) {
-            statusMessage.textContent = "RUNNING";
             document.body.classList.add('state-running');
-        } else {
-            statusMessage.textContent = "READY";
         }
     }
 }
@@ -72,7 +66,6 @@ function pauseTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
     startBtn.textContent = 'RESUME';
-    statusMessage.textContent = "PAUSED";
     document.body.classList.remove('state-running');
 }
 
